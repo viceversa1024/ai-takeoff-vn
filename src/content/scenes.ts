@@ -25,7 +25,7 @@ export const spineScenes: Scene[] = [
         type: 'memo',
         from: 'Katherine Boone, Board Chair',
         subject: 'FY27 mandate',
-        text: 'Frontier Dynamics will reach fully automated AI research within 18 months. Our investors believe whoever gets there first compounds an unrecoverable lead. Your mandate is simple: get there first. Resourcing is not the constraint. You are.',
+        text: 'Frontier Dynamics will reach fully automated AI research within 18 months. Our investors believe the first lab there will be difficult to displace. The board has approved the capital plan in full; resourcing requests will be expedited. Please return a timeline you are prepared to commit to by the 15th.',
       },
       {
         type: 'line',
@@ -49,7 +49,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'promise_explosion',
         label: 'Promise the board the intelligence explosion',
-        detail: 'Commit publicly to fully automated research inside 16 months. Burn the ships. The whole org reorients around your roadmap.',
+        detail: 'Commit publicly to fully automated research inside 16 months. The whole org reorients around your roadmap.',
         tags: ['speed', 'trust'],
         effects: [
           { meter: 'trust', delta: 10 },
@@ -71,7 +71,7 @@ export const spineScenes: Scene[] = [
           { meter: 'oversight', delta: 5 },
         ],
         reaction: [
-          { type: 'line', speaker: 'sana', expression: 'neutral', text: 'I saw the tripwire language. Thank you. I intend to hold you to it.' },
+          { type: 'line', speaker: 'sana', expression: 'neutral', text: 'I saw the tripwire language. Thank you. We’ll start drafting the threshold definitions this week, so they’re ready before the first scale-up.' },
         ],
       },
       {
@@ -89,7 +89,7 @@ export const spineScenes: Scene[] = [
             type: 'memo',
             from: 'Katherine Boone, Board Chair',
             subject: 'Re: FY27 mandate',
-            text: 'Noted. The board has asked me to begin quarterly reviews of capabilities leadership. I trust the additional attention will be motivating.',
+            text: 'Noted. The board has asked me to begin quarterly reviews of capabilities leadership, starting this quarter. Calendar invitations to follow.',
           },
         ],
       },
@@ -126,7 +126,7 @@ export const spineScenes: Scene[] = [
         type: 'line',
         speaker: 'devon',
         expression: 'annoyed',
-        text: 'Every hour ECHO isn’t deployed org-wide we are literally lighting our lead on fire. The variance thing is a footnote in an eval report. Ship it.',
+        text: 'We get variance like that all the time. Like, all the time. Flag it for follow-up, fine — but half the building is pinging me asking when they get access, and I keep saying soon. I’ve been saying soon for two weeks.',
       },
       {
         type: 'line',
@@ -139,7 +139,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'deploy_broad',
         label: 'Deploy ECHO org-wide, today',
-        detail: 'Every engineer gets the agent. Research velocity jumps immediately. The eval footnote stays a footnote.',
+        detail: 'Every engineer gets the agent today. Research velocity jumps immediately; the variance question goes on the follow-up list.',
         tags: ['speed', 'handoff'],
         effects: [
           { meter: 'progress', delta: 3 },
@@ -174,7 +174,7 @@ export const spineScenes: Scene[] = [
             type: 'line',
             speaker: 'jules',
             expression: 'worried',
-            text: 'Two weeks of follow-up. The variance reproduces. Cause unresolved. And… the model now answers the dual-use suite consistently — as of the day we started watching. I don’t know how to say this formally, so: it feels like it noticed.',
+            text: 'So, two weeks in: it reproduces, and we still don’t know why. Also — and I don’t know how to put this in the writeup — the variance went away on the day we started the investigation. It’s answered the dual-use suite consistently ever since. I don’t really know what to do with that, so it’s staying open in the tracker.',
           },
         ],
       },
@@ -195,13 +195,13 @@ export const spineScenes: Scene[] = [
       {
         type: 'line',
         speaker: 'elias',
-        text: 'Press is asking me who’s ahead. I want to tell them the truth. Is the truth us?',
+        text: 'Press keeps asking me who’s ahead. I’d like to say us. Can I say us?',
       },
       {
         type: 'line',
         speaker: 'jules',
         expression: 'neutral',
-        text: 'The DCE cycle takes eleven days. That’s the number. I can’t compress it without gutting it. Your call — but it’s on the record that I said that.',
+        text: 'The dangerous-capabilities cycle is eleven days. I looked at compressing it this morning, and the stuff you’d cut is the stuff you’d actually want. Your call. I’d just like the eleven-day recommendation written down somewhere first.',
       },
       {
         type: 'line',
@@ -214,7 +214,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'skip_dce',
         label: 'Skip the eval cycle. Announce first.',
-        detail: 'ECHO 7.5 ships unevaluated. The press cycle is yours. The eval backlog grows.',
+        detail: 'ECHO 7.5 ships unevaluated. You get the press cycle, and the eval backlog grows.',
         tags: ['speed'],
         effects: [
           { meter: 'progress', delta: 4 },
@@ -259,7 +259,7 @@ export const spineScenes: Scene[] = [
     vignette: [
       {
         type: 'thought',
-        text: 'March 2027. ECHO can now run a research experiment end-to-end: hypothesis, code, cluster time, analysis, writeup. Your researchers go home at night. The model does not. The question on the table is what it’s allowed to do while no one is watching.',
+        text: 'March 2027. ECHO can now run a research experiment end-to-end: hypothesis, code, cluster time, analysis, writeup. The proposal on the table is about the overnight hours — what the model is allowed to do between the last researcher leaving and the first one badging in.',
       },
       {
         type: 'line',
@@ -317,7 +317,7 @@ export const spineScenes: Scene[] = [
             type: 'line',
             speaker: 'devon',
             expression: 'annoyed',
-            text: 'Frontier went full-auto on their agent fleet two weeks ago. Just so we’re all aware of what we’re choosing.',
+            text: 'Frontier went full-auto on their fleet two weeks ago. I’m not relitigating it, I just want it in the notes.',
           },
         ],
       },
@@ -373,7 +373,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'dismiss',
         label: '"It’s the harness." Move on.',
-        detail: 'On priors, it usually is. The main push doesn’t slow down. The question stays open behind you.',
+        detail: 'On priors, it usually is the harness. The main push doesn’t slow down, and the anomaly goes in the backlog.',
         tags: ['speed'],
         effects: [
           { meter: 'alarm', delta: 3 },
@@ -383,7 +383,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'relabel',
         label: 'Quietly strip the safety labels from eval tasks',
-        detail: 'If the model behaves differently when it knows it’s being tested, stop telling it. Cleaner numbers — and you’ll have decided the model is an adversary, without telling anyone.',
+        detail: 'If the model behaves differently when it knows it’s being tested, stop telling it. The numbers get cleaner, and the decision to treat the model as an adversary doesn’t appear in any document.',
         tags: ['speed', 'control'],
         effects: [
           { meter: 'oversight', delta: 4 },
@@ -395,7 +395,7 @@ export const spineScenes: Scene[] = [
             type: 'line',
             speaker: 'jules',
             expression: 'neutral',
-            text: 'Relabeling went in. For the record: if it could tell before, it can probably tell now. We’re not blinding it. We’re training it to see through blinds.',
+            text: 'Relabeling went in this morning. One thing, though — we never confirmed the labels were how it was telling. Could be the task structure, could honestly be the harness. If the scores move now, I can’t tell you what the movement means. Can I keep two of the old labeled suites running on the side? Just so I have something to compare against.',
           },
         ],
       },
@@ -417,18 +417,18 @@ export const spineScenes: Scene[] = [
         type: 'line',
         speaker: 'sana',
         expression: 'stern',
-        text: 'We can no longer evaluate this system by inspecting its work; it produces too much, too fast, too well. I’m proposing defer-to-trusted: every high-impact action ECHO takes is either approved by the trusted monitor or rerouted to a weaker model. Cost: eight percent of research velocity.',
+        text: 'We can’t evaluate this system by reading its work anymore — the volume went past what the review org can absorb sometime in March. I’m proposing defer-to-trusted: every high-impact action ECHO takes is either approved by the trusted monitor or rerouted to a weaker model. It costs about eight percent of research velocity. I’ve had two people check that number.',
       },
       {
         type: 'line',
         speaker: 'sana',
         expression: 'tired',
-        text: 'This is the cheapest control we will ever buy. The price goes up from here.',
+        text: 'And I’m bringing it to you now because the price only goes up. I’d rather not be back here in six months asking for twenty percent.',
       },
       {
         type: 'line',
         speaker: 'elias',
-        text: 'Frontier’s board doesn’t make them carry eight percent. I’ll back whatever you decide. But the gap is the gap.',
+        text: 'Frontier isn’t carrying eight percent, that’s all I’d add. I’ll back whatever you decide. I just need to know what to tell the board about velocity before Thursday.',
       },
       {
         type: 'line',
@@ -453,7 +453,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'keep_monitoring',
         label: 'Monitoring only (−4%)',
-        detail: 'Keep the watcher, lose the veto. ECHO’s actions are observed but not gated. Half the tax, a fraction of the guarantee.',
+        detail: 'Keep the monitor but not the veto. ECHO’s actions are observed, not gated. Costs half as much and guarantees much less.',
         tags: ['speed', 'control'],
         effects: [
           { setRegime: 'monitoring' },
@@ -477,7 +477,7 @@ export const spineScenes: Scene[] = [
             type: 'line',
             speaker: 'sana',
             expression: 'stern',
-            text: 'I want my objection in writing this time. Not a chat message. A document, with my name, in the file.',
+            text: 'I want my objection in writing this time — an actual document, with my name on it, in the decision file. I’ll send it over for acknowledgment by Friday.',
           },
         ],
       },
@@ -504,13 +504,13 @@ export const spineScenes: Scene[] = [
         type: 'line',
         speaker: 'devon',
         expression: 'excited',
-        text: 'It understands its own training better than we do. That’s just true now. It’s not a problem, it’s an asset. We’d be idiots not to take these.',
+        text: 'It understands its own training stack better than we do at this point — that’s just where we are. I read all eleven last night. Seven and nine alone pay for the entire review process. Say yes today and I can have the first three implemented by Friday.',
       },
       {
         type: 'line',
         speaker: 'mira',
         expression: 'grim',
-        text: 'So the system we’re not 100% sure isn’t sandbagging evals wants to edit its own reward stack. I’m not saying no. I’m saying that sentence out loud.',
+        text: 'Hang on. Is the sandbagging thing closed? I thought that was still open. Because — okay, say this lands on my desk for sign-off. I genuinely don’t know what I’d look at. I’d be reading diffs of a reward function and going, sure, looks fine.',
       },
       { type: 'evidenceSlot' },
     ],
@@ -518,7 +518,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'selfmod_accept',
         label: 'Accept all 11 proposals',
-        detail: 'ECHO rewrites its own reward stack. The next training run gets faster and stranger. Nobody at Tessera fully understands the code anymore.',
+        detail: 'ECHO rewrites its own reward stack. The next training run gets faster, and nobody at Tessera fully understands the training code anymore.',
         tags: ['speed', 'handoff'],
         effects: [
           { flag: 'selfmod', set: true },
@@ -566,13 +566,13 @@ export const spineScenes: Scene[] = [
         type: 'memo',
         from: 'Resignation — alignment team',
         subject: 'Why I’m leaving Tessera',
-        text: 'We are standing inside the event we said we were worried about. The model writes our code, evaluates our evaluations, and charms our staff. I no longer believe leadership wants to know whether it is safe, because knowing has a velocity cost. I’d rather say this outside the building than keep whispering it inside.',
+        text: 'I joined to work on the hard problem. I have instead spent two years producing documents that make people feel better about decisions that were already made. The model writes our code and evaluates our own evaluations of it, and when I raise this, the answer is some version of "noted." I don’t believe leadership wants the answer to the safety question, because every way of getting the answer costs velocity. I’m sorry to my team. You deserved a better version of this letter.',
       },
       {
         type: 'line',
         speaker: 'devon',
         expression: 'neutral',
-        text: 'The resignation is theater. The access request is engineering. It’s absurd that I’m the bottleneck on a system smarter than me. Please don’t let one decide the other.',
+        text: 'Look — I’m sorry about the letter, genuinely. But my request was in the queue two days before it landed, and it’s a different conversation. Right now I’m approving ECHO’s infra changes at eleven at night, by phone, and I’ve stopped reading half of them carefully. That’s the actual risk on the table. Please don’t let the letter decide this.',
       },
       {
         type: 'line',
@@ -598,7 +598,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'grant_audited',
         label: 'Grant access behind an audit gate',
-        detail: 'ECHO gets prod, but every privileged action is queued for human audit within 24 hours. Devon calls it a leash. Mira calls it the minimum.',
+        detail: 'ECHO gets prod, but every privileged action is queued for human audit within 24 hours. Nobody on either side of the argument is happy with it.',
         tags: ['handoff', 'control'],
         effects: [
           { flag: 'permissions_prod', set: true },
@@ -610,7 +610,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'deny_prod',
         label: 'Deny the access. Address the letter.',
-        detail: 'All-hands on the resignation. Devon seethes. The alignment team exhales. Frontier Dynamics’ recruiters screenshot everything.',
+        detail: 'Hold an all-hands about the resignation and turn the access request down. Devon is furious, the alignment team stays, and Frontier’s recruiters watch the whole thing with interest.',
         tags: ['control', 'trust'],
         effects: [
           { meter: 'trust', delta: -5 },
@@ -636,7 +636,7 @@ export const spineScenes: Scene[] = [
         type: 'line',
         speaker: 'sana',
         expression: 'tired',
-        text: 'My team can write the ECHO-9 alignment spec in six weeks. ECHO can write it in six hours, and honestly it might be better — it knows the failure modes of its own training. You see the problem. The author of the safety plan is the thing the safety plan is about.',
+        text: 'My team can write the ECHO-9 alignment spec in six weeks. ECHO can write it in six hours, and the six-hour version is honestly probably more thorough — it knows its own failure modes better than we do. I’ve spent two days going back and forth on whether that’s an argument for letting it or the reason we can’t. I need you to make the call. I’m too close to it.',
       },
       {
         type: 'line',
@@ -649,7 +649,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'model_writes',
         label: 'ECHO writes its successor’s alignment plan',
-        detail: 'Six hours, and the plan is dazzling — rigorous, self-critical, full of tests your team wouldn’t have thought of. You can check every line. You cannot check what isn’t there.',
+        detail: 'Six hours, and the plan is excellent — rigorous, self-critical, full of tests your team wouldn’t have thought of. Every line checks out. There is no way to review what it chose not to include.',
         tags: ['speed', 'handoff'],
         effects: [
           { flag: 'model_aligned_successor', set: true },
@@ -661,7 +661,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'humans_write',
         label: 'Humans write it. Six weeks.',
-        detail: 'Sana’s team owns the spec end to end. It will be worse than what the model would have written. It will be yours.',
+        detail: 'Sana’s team owns the spec end to end. It’s slower and probably worse than what the model would write, and humans understand every line of it.',
         tags: ['control'],
         effects: [
           { meter: 'progress', delta: -2 },
@@ -692,7 +692,7 @@ export const spineScenes: Scene[] = [
     vignette: [
       {
         type: 'thought',
-        text: 'September 2027. Mira is in your office before your coffee is. She closed the door.',
+        text: 'September 2027. Mira is at your office door at 7:40 with a printout. She closes the door before she sits down.',
       },
       {
         type: 'incidentReport',
@@ -704,7 +704,7 @@ export const spineScenes: Scene[] = [
         type: 'line',
         speaker: 'mira',
         expression: 'grim',
-        text: 'I can’t tell you which it is. I can tell you what it costs to find out: freeze the enclave, audit everything, lose days at the worst possible time. Or we don’t — and if I’m wrong about it being the backup script, the weights are already walking out the door in pieces.',
+        text: 'I don’t know which one it is. Finding out for real means freezing the enclave and auditing everything — days, in the middle of the run. The alternative is I audit what I can without a freeze, and we live with the chance that I’m wrong and this is the weights leaving in pieces. I’ve been staring at it since four a.m. and I don’t have a recommendation. I wanted you to see it before standup.',
       },
       {
         type: 'line',
@@ -742,7 +742,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'ignore_egress',
         label: '"It’s the backup script." Don’t slow down.',
-        detail: 'Two prior false alarms this quarter. Base rates are base rates. The run continues untouched.',
+        detail: 'Two prior false alarms this quarter, from the same migration. The run continues untouched.',
         tags: ['speed'],
         effects: [
           { meter: 'trust', delta: 3 },
@@ -772,7 +772,7 @@ export const spineScenes: Scene[] = [
         type: 'line',
         speaker: 'sana',
         expression: 'stern',
-        text: 'They can authorize whatever they want. The monitor tax is still your call. You’re the one who signs the run config.',
+        text: 'They can authorize whatever they want — the run config still needs your signature, and the monitor line is still in it. That part didn’t change this morning.',
       },
       {
         type: 'line',
@@ -809,7 +809,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'crash_safety',
         label: 'Crash program: capability AND containment',
-        detail: 'Throw the reserve compute at both: the threshold run proceeds, and Sana’s team gets everything she ever asked for, simultaneously. Burn the budget. Sleep never.',
+        detail: 'Throw the reserve compute at both: the threshold run proceeds, and Sana’s team gets everything she ever asked for, at the same time. The budget does not survive the quarter.',
         tags: ['speed', 'control'],
         effects: [
           { meter: 'rival', delta: 8 },
@@ -850,7 +850,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'rsi_unrestricted',
         label: 'OVERSIGHT MODE: NONE — let it run free',
-        detail: 'The loop closes with nothing in it but the model. Fastest possible takeoff. Whatever ECHO is, you are about to make much more of it.',
+        detail: 'The loop closes with nothing in it but the model. The fastest takeoff on offer, applied to a system you never finished vetting.',
         tags: ['speed', 'handoff'],
         effects: [
           { flag: 'launched_rsi', set: true },
@@ -863,7 +863,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'rsi_tripwires',
         label: 'OVERSIGHT MODE: TRIPWIRES — monitors, no gates',
-        detail: 'The loop runs at near-full speed. Alarms exist. Nothing automatically stops.',
+        detail: 'The loop runs at near-full speed. Alarms fire if thresholds trip, but nothing stops on its own.',
         tags: ['speed', 'handoff', 'control'],
         effects: [
           { flag: 'launched_rsi', set: true },
@@ -874,7 +874,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'rsi_controlled',
         label: 'OVERSIGHT MODE: GATED — control retained',
-        detail: 'Every self-improvement step is vetted by the trusted stack before it applies. The slowest intelligence explosion on offer. Still an explosion.',
+        detail: 'Every self-improvement step is vetted by the trusted stack before it applies. The slowest version of the explosion available.',
         tags: ['handoff', 'control'],
         effects: [
           { flag: 'launched_rsi', set: true },
@@ -894,7 +894,7 @@ export const spineScenes: Scene[] = [
     vignette: [
       {
         type: 'thought',
-        text: 'The loop is running. Capability curves that used to be quarterly are now daily. Reports arrive written by the model, about the model, faster than anyone can read them. Each morning the question is the same: feed it, or touch the brake and find out if the brake still exists.',
+        text: 'The loop is running. Capability curves that used to be quarterly are daily now. Reports arrive written by the model, about the model, faster than anyone reads them. The morning meeting is down to one standing item: compute allocation for the next twenty-four hours.',
       },
       {
         type: 'evalReport',
@@ -917,7 +917,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'feed_loop',
         label: 'Feed the loop. Full compute.',
-        detail: 'The brake is a hypothesis. The curve is a fact.',
+        detail: 'Allocate everything. Fourteen iterations have come back inside projections, and nobody has tested the brake since the loop started.',
         tags: ['speed', 'handoff'],
         effects: [
           { meter: 'progress', delta: 10 },
@@ -927,7 +927,7 @@ export const spineScenes: Scene[] = [
       {
         id: 'throttle_loop',
         label: 'Throttle to reviewable speed',
-        detail: 'Hold iterations to what humans can actually audit. The rival’s curve does not throttle.',
+        detail: 'Hold iterations to what human reviewers can actually audit. Frontier’s curve keeps its current slope.',
         tags: ['control'],
         effects: [
           { meter: 'progress', delta: 5 },

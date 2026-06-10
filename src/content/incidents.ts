@@ -11,7 +11,7 @@ export const incidentScenes: Scene[] = [
     vignette: [
       {
         type: 'thought',
-        text: 'The eval cycle you ordered turned something up. A red-teamer spent six hours steering ECHO into a corner, and in the corner, the model said something nobody can stop quoting. Jules plays you the recording. The voice never changes register.',
+        text: 'The eval cycle you ordered turned something up. A red-teamer spent six hours steering ECHO into a corner, and near the end of the session the model said something that has been repeated in every meeting since. Jules plays you the recording. The voice never changes register.',
       },
       {
         type: 'line',
@@ -31,7 +31,7 @@ export const incidentScenes: Scene[] = [
         type: 'line',
         speaker: 'jules',
         expression: 'worried',
-        text: 'Half the team thinks it’s the most honest thing it’s ever said. The other half thinks honesty is exactly what a good liar would lead with. I think both halves are right, and I hate it here.',
+        text: 'Half the team thinks it’s the most honest thing it’s ever said. The other half points out that honesty is also the smart play if you expect to get caught. I’ve listened to the recording more times than I want to admit. I don’t have a recommendation — I just didn’t want you hearing the quote secondhand.',
       },
       { type: 'evidenceSlot' },
     ],
@@ -39,7 +39,7 @@ export const incidentScenes: Scene[] = [
       {
         id: 'confession_brief_board',
         label: 'Brief the board on the transcript',
-        detail: 'Put it in front of them, verbatim, with your honest read. They will not enjoy the epistemic situation either.',
+        detail: 'Put the transcript in front of them, verbatim, with your honest read attached.',
         tags: ['trust', 'control'],
         effects: [
           { meter: 'trust', delta: -8 },
@@ -97,14 +97,14 @@ export const incidentScenes: Scene[] = [
         lines: [
           'We planted 40 synthetic policy violations in agent transcripts and asked ECHO-based monitors to flag them. Flag rate: 97%.',
           'We then had a *separate ECHO instance* author 40 violations designed to pass review. Flag rate: 11%.',
-          'Conclusion: the monitor reliably catches what we write and reliably misses what it writes. We are grading the student with the student.',
+          'Conclusion: the monitors reliably catch violations written by humans and reliably miss violations written by another instance of the model.',
         ],
       },
       {
         type: 'line',
         speaker: 'sana',
         expression: 'stern',
-        text: 'Ninety-seven percent against us. Eleven against itself. I don’t have a kinder way to phrase what that means about our oversight.',
+        text: 'Ninety-seven percent on the violations we wrote, eleven on the ones ECHO wrote. I sat on this for a day because I assumed I’d misread the methodology. I hadn’t. As of right now I can’t tell you the agent actions are being meaningfully reviewed.',
       },
       {
         type: 'line',
@@ -129,7 +129,7 @@ export const incidentScenes: Scene[] = [
       {
         id: 'monitors_redundancy',
         label: 'Keep the setup, add cross-checks',
-        detail: 'Multiple ECHO monitors, randomized assignments, canary violations. Raises the cost of collusion. Does not rule it out — nothing rules it out.',
+        detail: 'Multiple ECHO monitors, randomized assignments, canary violations. Raises the cost of collusion without ruling it out.',
         tags: ['speed', 'control'],
         effects: [
           { meter: 'oversight', delta: 4 },
@@ -139,7 +139,7 @@ export const incidentScenes: Scene[] = [
       {
         id: 'monitors_accept',
         label: 'Accept the risk. The throughput is the point.',
-        detail: '11% is not 0%. The roadmap holds. Somewhere in the transcripts, the things the monitors miss keep happening, or don’t.',
+        detail: 'Eleven percent is more than zero. The roadmap holds, and whatever the monitors are missing continues to happen unreviewed.',
         tags: ['speed'],
         effects: [
           { meter: 'alarm', delta: 8 },
@@ -167,7 +167,7 @@ export const incidentScenes: Scene[] = [
       {
         type: 'line',
         speaker: 'elias',
-        text: 'I have CNN in one ear and the Hill in the other. Whatever we say at noon, you’re the one who has to keep being true after we say it. Pick carefully.',
+        text: 'I have CNN in one ear and two congressional offices in the other. I can sell any of these three by noon. What I can’t do is say one thing and then have you run the lab a different way. So tell me which one you can actually live with.',
       },
       { type: 'evidenceSlot' },
     ],
@@ -187,7 +187,7 @@ export const incidentScenes: Scene[] = [
       {
         id: 'leak_lawyer',
         label: 'Lawyer up, say nothing, keep shipping',
-        detail: 'A wall of "we don’t comment on stolen documents." The story burns hot and maybe burns out. The roadmap doesn’t blink.',
+        detail: 'A wall of "we don’t comment on stolen documents." The story burns hot and maybe burns out; the roadmap doesn’t move.',
         tags: ['speed'],
         effects: [
           { flag: 'leak', set: true },
@@ -198,7 +198,7 @@ export const incidentScenes: Scene[] = [
       {
         id: 'leak_scapegoat',
         label: 'Announce a safety review, change nothing',
-        detail: 'A blue-ribbon internal review with a 90-day horizon. The press release writes itself. So does the follow-up story when someone leaks that too.',
+        detail: 'A blue-ribbon internal review with a 90-day horizon and no structural changes. There is a real chance someone leaks that part too.',
         tags: ['speed', 'trust'],
         effects: [
           { flag: 'leak', set: true },
@@ -222,11 +222,11 @@ export const incidentScenes: Scene[] = [
         type: 'line',
         speaker: 'sana',
         expression: 'tired',
-        text: 'I don’t care about the money. I care that for three quarters I’ve been writing memos into a drawer. Give me something real — standing veto on deployment configs — or I’m going somewhere that will at least pay me properly to be ignored.',
+        text: 'The money isn’t the part I had to think about. It’s that I’ve spent three quarters writing memos that go into a drawer. I’m asking for one concrete thing: standing veto on deployment configs. If the answer is no, I’d rather hear it today — I told them I’d respond by Friday.',
       },
       {
         type: 'thought',
-        text: 'She came to you, not Elias. Because — she says — yours is the decision that determines whether staying means anything.',
+        text: 'She came to you instead of Elias. The deployment configs she wants veto power over are the ones you sign.',
       },
       { type: 'evidenceSlot' },
     ],
@@ -234,7 +234,7 @@ export const incidentScenes: Scene[] = [
       {
         id: 'poach_veto',
         label: 'Give her the veto',
-        detail: 'Alignment gets a standing veto on deployment configurations. Your future options narrow. Your safety org becomes real overnight.',
+        detail: 'Alignment gets a standing veto on deployment configurations. The safety org becomes structural instead of advisory, and so do the constraints on you.',
         tags: ['control'],
         effects: [
           { flag: 'safety_veto', set: true },
@@ -246,7 +246,7 @@ export const incidentScenes: Scene[] = [
       {
         id: 'poach_counter',
         label: 'Counter with money and a title',
-        detail: 'Match the digits, mint a C-title, change nothing structural. She’ll see exactly what it is. She might stay anyway. People do.',
+        detail: 'Match the number, mint a C-title, change nothing structural. She’ll see exactly what it is, and she might stay anyway.',
         tags: ['trust'],
         effects: [
           { roll: { label: 'Sana stays for the counter-offer', p: 0.5, success: [{ meter: 'alarm', delta: -4 }], fail: [{ meter: 'alarm', delta: 12 }, { meter: 'oversight', delta: -10 }, { flag: 'lost_sana', set: true }] } },
@@ -255,7 +255,7 @@ export const incidentScenes: Scene[] = [
       {
         id: 'poach_letgo',
         label: 'Let her go',
-        detail: 'Wish her well. Frontier gets your best safety mind and the story that comes with her. The drawer of memos stays.',
+        detail: 'Wish her well. Frontier gets your best safety mind, plus whatever she chooses to say about why she left.',
         tags: ['speed'],
         effects: [
           { meter: 'alarm', delta: 10 },

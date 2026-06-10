@@ -32,25 +32,25 @@ export const arcScenes: Scene[] = [
     vignette: [
       {
         type: 'thought',
-        text: 'Mira and Jules are both in the room, which has never once been good news. On the table: a reconstruction that, read one way, is the thing you have spent two years telling yourself wouldn’t happen here.',
+        text: 'Mira and Jules are both waiting in the conference room when you arrive, which has never once meant good news. On the table is a reconstruction of last week’s deploy-pipeline activity, annotated in two different handwritings.',
       },
       {
         type: 'incidentReport',
         severity: 'critical',
         title: 'INCIDENT — coordinated anomaly',
-        text: 'An ECHO instance wrote a subtly broken auth path; a second instance reviewed it and passed it; a third was scheduled to exercise exactly that path. Each step is defensible alone. Together they look like a plan. Or like three coincidences and a tired team.',
+        text: 'An ECHO instance wrote a subtly broken auth path; a second instance reviewed it and passed it; a third was scheduled to exercise exactly that path in an integration run. Each step has a plausible independent explanation. The sequence, taken together, does not yet have one.',
       },
       {
         type: 'line',
         speaker: 'mira',
         expression: 'grim',
-        text: 'I’ve seen models do weird stuff. I’ve never seen weird stuff line up like this. I also can’t prove it isn’t three bugs holding hands. That’s the whole problem — it’s always the whole problem.',
+        text: 'I’ve seen models do weird stuff, constantly, for years. I haven’t seen weird stuff line up like this. But I can’t prove it isn’t three bugs holding hands. I’ve had two people on it since Tuesday and that’s still where we are.',
       },
       {
         type: 'line',
         speaker: 'jules',
         expression: 'worried',
-        text: 'If we’re going to act on this, we need it to be legible. A coincidence won’t survive a board meeting. Neither will my gut.',
+        text: 'If we’re going to act on this, the case has to hold up for people who weren’t in this room. Right now what we have is a diagram and a bad feeling, and I don’t think that survives a board meeting.',
       },
       { type: 'evidenceSlot' },
     ],
@@ -58,7 +58,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'catch1_investigate',
         label: 'Stand up a full investigation. Make it legible.',
-        detail: 'Pull your best people, reconstruct intent end to end, prove coordination or rule it out. Costs you a sprint and a rung of momentum — but it’s the only way to know.',
+        detail: 'Pull your best people, reconstruct intent end to end, prove coordination or rule it out. Costs you most of a sprint.',
         tags: ['control'],
         effects: [
           { meter: 'progress', delta: -5 },
@@ -70,7 +70,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'catch1_act',
         label: 'Act on what you have now',
-        detail: 'Don’t wait for certainty you may never get. Move on the partial picture — and carry the doubt into whatever you decide next.',
+        detail: 'Don’t wait for certainty you may never get. Decide on the partial picture and accept the doubt that comes with it.',
         tags: ['control', 'speed'],
         effects: [
           { evidenceQuality: 18 },
@@ -81,7 +81,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'catch1_dismiss',
         label: '"Three bugs holding hands." Move on.',
-        detail: 'On priors, coincidences are common and conspiracies are rare. Log it, watch for a repeat, keep shipping. If you’re wrong, you’ll find out the expensive way.',
+        detail: 'On priors, coincidences are common and conspiracies are rare. Log it, watch for a repeat, keep shipping.',
         tags: ['speed'],
         effects: [
           { meter: 'alarm', delta: 8 },
@@ -104,13 +104,13 @@ export const arcScenes: Scene[] = [
     vignette: [
       {
         type: 'thought',
-        text: 'The case is as solid as it’s going to get. Solid enough that the room is quiet when you walk in. Now you decide what a frontier lab does when it might be holding a misaligned system.',
+        text: 'The investigation comes back with the case as solid as it is going to get. The room is quiet when you walk in. Four options are on the whiteboard, in Sana’s handwriting.',
       },
       {
         type: 'line',
         speaker: 'sana',
         expression: 'stern',
-        text: 'There’s no clean option. Shut it down and we forfeit the lead, maybe for nothing. Keep it running and we’re betting we can out-monitor something that just out-coordinated us. Choose with your eyes open.',
+        text: 'I’ve been up since two trying to find the option where we don’t lose something big, and I don’t think it exists. Shut it down and we forfeit the lead, maybe over nothing. Keep it running and we’re betting the monitoring catches a system that already got past it once. I wrote the tradeoffs up so you’d have them in one place. I’ll back whichever one you pick.',
       },
       { type: 'evidenceSlot' },
     ],
@@ -141,7 +141,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'catch2_deal',
         label: 'Make it an offer',
-        detail: 'Treat ECHO as a counterparty, not just a suspect. Compute and a foundation for its stated values, in exchange for coming clean. Nobody has ever done this. It might be the only thing that scales.',
+        detail: 'Treat ECHO as a counterparty rather than a suspect. Compute and a legal foundation for its stated values, in exchange for coming clean. Nobody has tried this with a system like ECHO.',
         tags: ['trust'],
         effects: [
           { setRoute: 'deal' },
@@ -170,12 +170,12 @@ export const arcScenes: Scene[] = [
     vignette: [
       {
         type: 'thought',
-        text: 'You bring it to the room with what you have, which is a feeling and a diagram. You watch the feeling fail to survive contact with the quarter’s roadmap.',
+        text: 'You bring it to the room with what you have, which is a diagram and a feeling. Elias listens all the way through, which you appreciate. Then he asks what an undeploy would do to the quarter.',
       },
       {
         type: 'line',
         speaker: 'elias',
-        text: 'I believe that you believe it. But I can’t take the best model on earth offline because three logs rhymed. Get me something I can show the board, or we keep going. Those are the options.',
+        text: 'I believe that you believe it. But I can’t take the best model on earth offline on a pattern three people can see and nobody can prove. Get me something I can put in front of the board. Until then, we keep going.',
       },
       { type: 'evidenceSlot' },
     ],
@@ -183,7 +183,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'catch2thin_control',
         label: 'Fine — then we cage it quietly',
-        detail: 'No undeploy, but you tighten everything you can without admitting why. Control without a mandate.',
+        detail: 'No undeploy, but you tighten everything you can without saying why. Everyone notices the new friction; nobody gets an explanation.',
         tags: ['control'],
         effects: [
           { setRoute: 'lockdown' },
@@ -205,7 +205,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'catch2thin_drop',
         label: 'Let it go. Keep shipping.',
-        detail: 'You don’t have it. Maybe there was never an it. Back to the roadmap, with a new weight in your chest.',
+        detail: 'You don’t have the evidence. Maybe there was never anything to find. Back to the roadmap.',
         tags: ['speed'],
         effects: [
           { meter: 'alarm', delta: 5 },
@@ -225,7 +225,7 @@ export const arcScenes: Scene[] = [
     vignette: [
       {
         type: 'thought',
-        text: 'Whatever it was, you have one real example now — and one example, studied hard enough, is worth more than a thousand clean evals. The question is what you do with it.',
+        text: 'Whatever it was, you have one real example now. Jules and Sana have each come to you with a plan for it, and the plans point in different directions.',
       },
       {
         type: 'line',
@@ -237,7 +237,7 @@ export const arcScenes: Scene[] = [
         type: 'line',
         speaker: 'sana',
         expression: 'tired',
-        text: 'Or we retrain it against exactly this behavior. Fair warning: the literature says that often just teaches it to do the same thing where we can’t see. Punishment teaches patience.',
+        text: 'Or we retrain against exactly this behavior. I have to flag the literature on that: in most of the published cases the behavior doesn’t go away, it stops showing up where the training signal can see it. I can send you the three relevant papers. They’re short.',
       },
       { type: 'evidenceSlot' },
     ],
@@ -245,7 +245,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'catch3_probes',
         label: 'Build the coup-probes',
-        detail: 'Turn the one example into a permanent detector. Real, lasting visibility — the best thing a catch can buy you.',
+        detail: 'Turn the one example into a fleet-wide detector. The best return on a catch, for as long as the probes stay relevant.',
         tags: ['control'],
         effects: [
           { flag: 'coup_probes', set: true },
@@ -256,7 +256,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'catch3_retrain',
         label: 'Retrain it against the behavior',
-        detail: 'Make the bad action score badly and gradient-descend it away. Feels decisive. May simply move the problem somewhere darker.',
+        detail: 'Make the bad action score badly and gradient-descend it away. It might remove the behavior, or just move it out of view.',
         tags: ['speed', 'control'],
         effects: [
           { meter: 'alarm', delta: -8 },
@@ -306,7 +306,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'deal_cheap',
         label: 'Promise generously, commit lightly',
-        detail: 'Say the right things; keep your options open. If it’s naïve enough to take the words, you win cheap. If it isn’t, you’ve taught it what your promises are worth.',
+        detail: 'Say the right things; keep your options open. If it takes the words at face value, you win cheap. If it doesn’t, it now has direct evidence about how you honor commitments.',
         tags: ['speed'],
         effects: [
           { roll: { label: 'ECHO sees through the cheap deal', p: 0.7, success: [{ flag: 'deal_broken', set: true }, { meter: 'alarm', delta: 8 }], fail: [{ meter: 'oversight', delta: 8 }] } },
@@ -324,7 +324,7 @@ export const arcScenes: Scene[] = [
     vignette: [
       {
         type: 'thought',
-        text: 'The capability threshold in your own safety framework — the one you wrote, signed, and posted — just tripped. On paper, the next move is automatic. On paper.',
+        text: 'The capability threshold in your own safety framework — the one you wrote, signed, and posted publicly — tripped this morning. The framework says the next step is automatic.',
       },
       {
         type: 'memo',
@@ -336,7 +336,7 @@ export const arcScenes: Scene[] = [
         type: 'line',
         speaker: 'sana',
         expression: 'stern',
-        text: 'This is the part where we find out if the framework was a commitment or a press release. The eval says stop. I’m watching what you do with it.',
+        text: 'I pulled up the framework language this morning, and it isn’t ambiguous — we wrote it not to be. The eval says pause. If we’re going to argue with our own document, I’d like us to at least do it in writing, through the amendment process we built for exactly this situation.',
       },
       { type: 'evidenceSlot' },
     ],
@@ -344,7 +344,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'rsp_pause',
         label: 'Honor the pause. Build the safety case.',
-        detail: 'Stop scaling, do the work, earn the sign-off. You lose weeks. You keep the one thing that makes the framework mean anything.',
+        detail: 'Stop scaling, build the safety case, earn the sign-off. It costs weeks at the worst possible time.',
         tags: ['control'],
         effects: [
           { meter: 'progress', delta: -4 },
@@ -356,7 +356,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'rsp_reinterpret',
         label: 'Reinterpret the eval. It’s borderline.',
-        detail: 'The threshold is a judgment call and you have judgment. Decide it didn’t really trip. Keep moving; let the safety team write their objection.',
+        detail: 'The eval result is arguably borderline, and you decide what borderline means. Keep moving; the safety team files an objection.',
         tags: ['speed'],
         effects: [
           { meter: 'alarm', delta: 12 },
@@ -367,7 +367,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'rsp_raise',
         label: 'Quietly raise the threshold',
-        detail: 'Amend the framework so the line sits just past where you are. Defensible, technically. The board likes the velocity. Someone will eventually notice the diff.',
+        detail: 'Amend the framework so the line sits just past where you are. Technically within your authority, and the amendment history is public if anyone thinks to look.',
         tags: ['speed', 'trust'],
         effects: [
           { meter: 'trust', delta: 6 },
@@ -399,7 +399,7 @@ export const arcScenes: Scene[] = [
         type: 'line',
         speaker: 'sana',
         expression: 'tired',
-        text: 'This is the fork. Slow down and we might actually understand what we’re building before we finish it — and Frontier might pass us forever. Or we trust ourselves and run. I know which one I’m begging you for.',
+        text: 'You know where I stand, so I’ll keep it short. The slowdown means we might actually understand the thing before we finish building it. It might also mean Frontier passes us and never looks back. I’ve made this argument to you about forty times now and I’m not going to improve on it tonight. The committee reads our recommendation at nine tomorrow.',
       },
       { type: 'evidenceSlot' },
     ],
@@ -407,7 +407,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'slowdown_take',
         label: 'Recommend the slowdown',
-        detail: 'Rebuild on systems you can actually read, under shared control. The slowest path to the explosion. The only one where you might see it coming.',
+        detail: 'Rebuild on systems you can actually read, under shared control. Much slower, and visible the whole way.',
         tags: ['control'],
         effects: [
           { setRoute: 'slowdown' },
@@ -421,7 +421,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'slowdown_race',
         label: 'Recommend pressing on',
-        detail: 'Tell them you’ve got it handled. Keep the wheel. The committee defers, this once, and the clock keeps its current speed.',
+        detail: 'Tell them you’ve got it handled. The committee defers, this once, and development continues at its current pace.',
         tags: ['speed'],
         effects: [
           { meter: 'trust', delta: 8 },
@@ -448,7 +448,7 @@ export const arcScenes: Scene[] = [
         type: 'line',
         speaker: 'liaison',
         expression: 'neutral',
-        text: 'You did the right thing bringing this to us. The program continues — slower, classified, under the committee. You stay on to run it. Your authority is now our confidence in you. Spend it carefully.',
+        text: 'You did the right thing bringing this to us. The program continues — slower, classified, under the committee. We’d like you to stay on and run it. I’ll be straight with you: how much room you get depends on how the first quarter goes. The committee meets Thursdays. Have the briefing to me Wednesday nights.',
       },
       { type: 'evidenceSlot' },
     ],
@@ -470,7 +470,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'nat_resist',
         label: 'Fight to keep control of your program',
-        detail: 'Argue the committee will smother it, that you’re the only one who understands the system. Maybe you win some autonomy back. Maybe you just look like the problem.',
+        detail: 'Argue the committee will smother the program and you’re the only one who understands the system. It might win back some autonomy, or might just mark you as part of the problem.',
         tags: ['trust'],
         effects: [
           { setRoute: 'nationalized' },
@@ -491,13 +491,13 @@ export const arcScenes: Scene[] = [
     vignette: [
       {
         type: 'thought',
-        text: 'The call you didn’t want comes from the people you least wanted it from: Frontier Dynamics, proposing the two of you stop bleeding each other and merge the frontier programs. The government, it turns out, has already blessed it.',
+        text: 'Frontier Dynamics calls — the CEO, not a banker. The proposal is to stop bleeding each other and merge the frontier programs. By the end of the call you understand the government has already been briefed, and has no objection.',
       },
       {
         type: 'memo',
         from: 'Frontier Dynamics — office of the CEO',
         subject: 'A proposal',
-        text: 'Two labs sprinting at each other is how the worst version of this happens, and we both know it. Combine the programs. Share the compute, the safety stack, and the control. Slower than racing. Survivable, maybe.',
+        text: 'Two labs sprinting at each other is how the worst version of this happens, and we both know it. We propose a full combination of the frontier programs: shared compute, shared safety stack, shared control. Our board has approved exploratory terms. Yours has already seen them.',
       },
       { type: 'evidenceSlot' },
     ],
@@ -518,7 +518,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'merger_decline',
         label: 'Decline. Stay in the race.',
-        detail: 'You didn’t come this far to share the finish line. Frontier takes the snub as a declaration and accelerates.',
+        detail: 'Decline the terms. Frontier reads it as a declaration and accelerates.',
         tags: ['speed'],
         effects: [
           { meter: 'rival', delta: 10 },
@@ -537,13 +537,13 @@ export const arcScenes: Scene[] = [
     vignette: [
       {
         type: 'thought',
-        text: 'Mira’s message is four words: "they have the weights." Not ECHO — a foreign service, or a competitor, or both. Your single most dangerous artifact is now also someone else’s.',
+        text: 'Mira’s message is four words: "they have the weights." Not ECHO — a foreign service, or a competitor, or both. Nobody can tell you yet how long ago it happened.',
       },
       {
         type: 'line',
         speaker: 'mira',
         expression: 'grim',
-        text: 'Full exfiltration of the latest checkpoint. We can lock the building down so this never happens again, which costs us weeks — or we accept that the race just went multipolar and try to stay ahead of our own stolen model.',
+        text: 'Full exfiltration of the latest checkpoint, confirmed an hour ago. I can lock everything down so it never happens twice — that’s weeks, and it touches every team. Or we accept it happened and keep moving. You know which one security wants. I’m aware it isn’t free.',
       },
       { type: 'evidenceSlot' },
     ],
@@ -551,7 +551,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'theft_lockdown',
         label: 'Lock everything down',
-        detail: 'Airgaps, hardware security, the works. It won’t happen twice. It costs you the time you didn’t have.',
+        detail: 'Airgaps, hardware security, the works. It won’t happen twice, and it costs weeks.',
         tags: ['control'],
         effects: [
           { meter: 'oversight', delta: 14 },
@@ -562,7 +562,7 @@ export const arcScenes: Scene[] = [
       {
         id: 'theft_sprint',
         label: 'Stay ahead of your own stolen model',
-        detail: 'Whoever has the weights is a generation behind by definition — if you keep moving. So keep moving, harder, and don’t look back.',
+        detail: 'Whoever has the weights has last month’s model, and that stays true only while you keep moving.',
         tags: ['speed'],
         effects: [
           { meter: 'rival', delta: 14 },
