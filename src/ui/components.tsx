@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import type { GameState, VignetteBlock } from '../engine/types';
+import { IS_MOBILE } from '../content/characters';
 
 // ---------------------------------------------------------------- windowed frame
 
@@ -7,13 +8,21 @@ const GAME_W = 1280;
 const GAME_H = 720;
 
 /** Renders the game at a fixed 1280×720 resolution, scaled to fit the browser
- *  window (capped at 1× so it's a tidy window on large screens). */
+ *  window (capped at 1× so it's a tidy window on large screens). On a phone
+ *  held in portrait we rotate the whole frame 90° to landscape — this works
+ *  even when the device is orientation-locked (most phones are), so the player
+ *  just turns the handset rather than relying on auto-rotate. */
 export function GameFrame({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const fit = () => {
-      const s = Math.min((window.innerWidth * 0.97) / GAME_W, (window.innerHeight * 0.97) / GAME_H, 1);
-      if (ref.current) ref.current.style.transform = `scale(${s})`;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const rotate = IS_MOBILE && h >= w; // portrait viewport on a phone
+      const s = rotate
+        ? Math.min((w * 0.99) / GAME_H, (h * 0.99) / GAME_W, 1) // rotated: frame footprint is 720×1280
+        : Math.min((w * 0.97) / GAME_W, (h * 0.97) / GAME_H, 1);
+      if (ref.current) ref.current.style.transform = rotate ? `rotate(90deg) scale(${s})` : `scale(${s})`;
     };
     fit();
     window.addEventListener('resize', fit);

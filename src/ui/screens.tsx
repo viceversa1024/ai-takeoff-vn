@@ -100,29 +100,24 @@ export function LoadingScreen({ progress }: { progress: number }) {
   );
 }
 
-// ---------------------------------------------------------------- rotate gate
-
-/** Shown on a phone held in portrait — the fixed 1280×720 frame is only usable
- *  in landscape, so we ask the player to turn the phone (and the preloader is
- *  deferred until they do, so we never spike memory while this is up). */
-export function RotateGate() {
-  return (
-    <div className="rotate-gate">
-      <div className="hearts">
-        {Array.from({ length: 8 }, (_, i) => (
-          <span key={i} style={{ left: `${(i * 53) % 100}%`, animationDuration: `${8 + ((i * 7) % 7)}s`, animationDelay: `${(i * 1.3) % 7}s` }}>
-            ♡
-          </span>
-        ))}
-      </div>
-      <div className="rotate-glyph">↻</div>
-      <h1>Turn your phone sideways ♥</h1>
-      <p>Situationship plays in landscape. Rotate to begin — and tap your browser’s fullscreen for the full effect.</p>
-    </div>
-  );
-}
-
 // ---------------------------------------------------------------- title
+
+/** Best-effort immersive mode on phones, fired from a user gesture: go
+ *  fullscreen and lock to landscape. Android Chrome honours both; iOS Safari
+ *  ignores them — there the CSS frame-rotation already presents the game
+ *  sideways, so the player just turns the handset. */
+async function enterImmersive() {
+  try {
+    await (document.documentElement as HTMLElement).requestFullscreen?.();
+  } catch {
+    /* unsupported / denied — fine */
+  }
+  try {
+    await (screen.orientation as ScreenOrientation & { lock?: (o: string) => Promise<void> })?.lock?.('landscape');
+  } catch {
+    /* unsupported / denied — fine */
+  }
+}
 
 export function TitleScreen({ onStart }: { onStart: (seed: number) => void }) {
   const hearts = useMemo(
@@ -136,9 +131,7 @@ export function TitleScreen({ onStart }: { onStart: (seed: number) => void }) {
     [],
   );
   const start = () => {
-    // best-effort fullscreen on phones only (Android Chrome honours it; iOS
-    // Safari ignores it). On desktop, leave the browser alone.
-    if (IS_MOBILE) document.documentElement.requestFullscreen?.().catch(() => {});
+    if (IS_MOBILE) void enterImmersive();
     onStart((Math.random() * 2 ** 31) | 0);
   };
   return (
@@ -163,8 +156,9 @@ export function TitleScreen({ onStart }: { onStart: (seed: number) => void }) {
         </p>
       </div>
       <button className="title-start" onClick={start}>
-        Clock in ♥
+        {IS_MOBILE ? 'Tap to play (fullscreen) ♥' : 'Clock in ♥'}
       </button>
+      {IS_MOBILE && <div className="title-hint">turn your phone sideways to read ♥</div>}
     </div>
   );
 }

@@ -396,43 +396,14 @@ button { font-family: var(--ui); cursor: pointer; }
    else — no need to hide it on narrow viewports (doing so just left a hole on
    landscape phones). */
 
-/* Phone-in-portrait gate: full-screen "rotate me" overlay shown before the game
-   loads. Matches the title screen's soft-pink palette. */
-.rotate-gate {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 28px;
-  overflow: hidden;
-  background: linear-gradient(180deg, #ffd9e6 0%, #ffeef2 45%, #fff6ef 100%);
+/* Mobile-only hint under the title button: the frame is CSS-rotated to landscape
+   on portrait phones, so nudge the player to turn the handset. */
+.title-hint {
+  margin-top: 14px;
   font-family: var(--ui);
-  color: #6b3a4e;
-}
-.rotate-gate .rotate-glyph {
-  font-size: 64px;
-  line-height: 1;
-  color: #ff7eb6;
-  animation: rotateHint 2.4s ease-in-out infinite;
-}
-.rotate-gate h1 {
-  font-family: var(--display, var(--ui));
-  font-size: 28px;
-  margin: 18px 0 8px;
-  color: #d6557f;
-}
-.rotate-gate p {
-  max-width: 320px;
   font-size: 15px;
-  line-height: 1.5;
-  opacity: 0.85;
-}
-@keyframes rotateHint {
-  0%, 100% { transform: rotate(-12deg); }
-  50% { transform: rotate(78deg); }
+  color: #c2638a;
+  opacity: 0.9;
 }
 
 /* ============================== dialogue box */

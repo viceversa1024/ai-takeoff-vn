@@ -2,23 +2,20 @@ import { useEffect, useMemo, useState } from 'react';
 import type { GameState } from './engine/types';
 import { newGame, resolveTurn, sceneById } from './engine/engine';
 import { allAssetUrls, IS_MOBILE } from './content/characters';
-import { DebriefScreen, EndingScreen, LoadingScreen, MilestoneOverlay, RotateGate, TitleScreen, TurnScreen } from './ui/screens';
+import { DebriefScreen, EndingScreen, LoadingScreen, MilestoneOverlay, TitleScreen, TurnScreen } from './ui/screens';
 import { DebugPanel } from './ui/components';
 
-// On phones, decode is the memory spike that crashes Safari — skip the forced
-// decode and only load a few at a time. Desktop keeps the eager full decode.
-const PRELOAD_CONCURRENCY = IS_MOBILE ? 4 : 8;
+const PRELOAD_CONCURRENCY = 8;
 
 /** Preload every sprite and background up front so nothing pops in mid-scene.
- *  Returns 0..1 progress; a missing file counts as done. Loads with a small
- *  concurrency pool and only runs once `enabled` (we defer it behind the
- *  portrait rotate-gate so we never spike memory while the phone is sideways-
- *  waiting). A missing file counts as done. */
-function useAssetPreload(enabled: boolean): number {
+ *  Desktop only — phones lazy-load each scene's art on demand, so we never hold
+ *  the whole set decoded in memory at once (that burst was crashing mobile
+ *  Safari). Returns 0..1 progress; a missing file counts as done. */
+function useAssetPreload(): number {
   const [done, setDone] = useState(0);
   const urls = useMemo(allAssetUrls, []);
   useEffect(() => {
-    if (!enabled) return;
+    if (IS_MOBILE) return; // lazy-load on phones
     if (urls.length === 0) {
       setDone(0);
       return;
@@ -36,7 +33,7 @@ function useAssetPreload(enabled: boolean): number {
       const finish = () => tick();
       // decode() forces full rasterization into memory; on mobile let the
       // browser decode lazily at paint time instead.
-      img.onload = () => (!IS_MOBILE && img.decode ? img.decode().then(finish, finish) : finish());
+      img.onload = () => (img.decode ? img.decode().then(finish, finish) : finish());
       img.onerror = finish;
       img.src = url;
     };
@@ -48,29 +45,8 @@ function useAssetPreload(enabled: boolean): number {
     return () => {
       cancelled = true;
     };
-  }, [urls, enabled]);
-  return urls.length ? done / urls.length : 1;
-}
-
-/** True when we're on a phone held in portrait — we gate the game (and defer
- *  the preloader) until it's rotated to landscape, where the fixed frame is
- *  actually usable. */
-function usePortraitGate(): boolean {
-  const [portrait, setPortrait] = useState(
-    () => IS_MOBILE && typeof window !== 'undefined' && window.matchMedia('(orientation: portrait)').matches,
-  );
-  useEffect(() => {
-    if (!IS_MOBILE) return;
-    const mq = window.matchMedia('(orientation: portrait)');
-    const update = () => setPortrait(mq.matches);
-    mq.addEventListener('change', update);
-    window.addEventListener('orientationchange', update);
-    return () => {
-      mq.removeEventListener('change', update);
-      window.removeEventListener('orientationchange', update);
-    };
-  }, []);
-  return portrait;
+  }, [urls]);
+  return IS_MOBILE ? 1 : urls.length ? done / urls.length : 1;
 }
 
 export default function App() {
@@ -78,20 +54,11 @@ export default function App() {
   const debug = params.get('debug') === '1';
   const urlSeed = params.get('seed');
 
-  const portraitGated = usePortraitGate();
-  const progress = useAssetPreload(!portraitGated);
+  const progress = useAssetPreload();
   const [ready, setReady] = useState(false);
   useEffect(() => {
     if (progress >= 1) setReady(true);
   }, [progress]);
-
-  if (portraitGated) {
-    return (
-      <div className="app">
-        <RotateGate />
-      </div>
-    );
-  }
 
   const [state, setState] = useState<GameState | null>(() => {
     if (urlSeed !== null) {
