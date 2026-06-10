@@ -102,22 +102,36 @@ export function LoadingScreen({ progress }: { progress: number }) {
 
 // ---------------------------------------------------------------- title
 
-/** Best-effort immersive mode on phones, fired from a user gesture: go
- *  fullscreen and lock to landscape. Android Chrome honours both; iOS Safari
- *  ignores them — there the CSS frame-rotation already presents the game
- *  sideways, so the player just turns the handset. */
-async function enterImmersive() {
+/** Best-effort immersive mode on phones. Must run synchronously inside the
+ *  click handler to keep the user-activation that fullscreen requires. Android
+ *  Chrome honours fullscreen + orientation-lock; iPhone Safari supports neither
+ *  (no Fullscreen API) — there the CSS frame-rotation already shows the game
+ *  landscape, and true fullscreen only comes from "Add to Home Screen". */
+function enterImmersive() {
+  const el = document.documentElement as HTMLElement & { webkitRequestFullscreen?: () => Promise<void> | void };
+  const lockLandscape = () => {
+    try {
+      void (screen.orientation as ScreenOrientation & { lock?: (o: string) => Promise<void> })?.lock?.('landscape')?.catch?.(() => {});
+    } catch {
+      /* unsupported / denied — fine */
+    }
+  };
   try {
-    await (document.documentElement as HTMLElement).requestFullscreen?.();
-  } catch {
-    /* unsupported / denied — fine */
-  }
-  try {
-    await (screen.orientation as ScreenOrientation & { lock?: (o: string) => Promise<void> })?.lock?.('landscape');
+    const req = el.requestFullscreen ?? el.webkitRequestFullscreen;
+    const p = req?.call(el);
+    if (p && typeof (p as Promise<void>).then === 'function') (p as Promise<void>).then(lockLandscape, () => {});
+    else lockLandscape();
   } catch {
     /* unsupported / denied — fine */
   }
 }
+
+// iPhone Safari has no Fullscreen API; detect so we can point those users at
+// "Add to Home Screen" instead of promising a fullscreen button that no-ops.
+const FULLSCREEN_SUPPORTED =
+  typeof document !== 'undefined' &&
+  !!(document.documentElement.requestFullscreen ||
+    (document.documentElement as HTMLElement & { webkitRequestFullscreen?: unknown }).webkitRequestFullscreen);
 
 export function TitleScreen({ onStart }: { onStart: (seed: number) => void }) {
   const hearts = useMemo(
@@ -131,7 +145,7 @@ export function TitleScreen({ onStart }: { onStart: (seed: number) => void }) {
     [],
   );
   const start = () => {
-    if (IS_MOBILE) void enterImmersive();
+    if (IS_MOBILE) enterImmersive();
     onStart((Math.random() * 2 ** 31) | 0);
   };
   return (
@@ -156,9 +170,15 @@ export function TitleScreen({ onStart }: { onStart: (seed: number) => void }) {
         </p>
       </div>
       <button className="title-start" onClick={start}>
-        {IS_MOBILE ? 'Tap to play (fullscreen) ♥' : 'Clock in ♥'}
+        {IS_MOBILE && FULLSCREEN_SUPPORTED ? 'Tap to play (fullscreen) ♥' : IS_MOBILE ? 'Tap to play ♥' : 'Clock in ♥'}
       </button>
-      {IS_MOBILE && <div className="title-hint">turn your phone sideways to read ♥</div>}
+      {IS_MOBILE && (
+        <div className="title-hint">
+          {FULLSCREEN_SUPPORTED
+            ? 'turn your phone sideways to read ♥'
+            : 'turn your phone sideways · Share → Add to Home Screen for fullscreen ♥'}
+        </div>
+      )}
     </div>
   );
 }
