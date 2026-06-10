@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-import type { Choice, GameState, Rung, Scene, VignetteBlock } from '../engine/types';
-import { formatDate, rungSpec } from '../engine/ladder';
+import type { Choice, GameState, Meters, Rung, Scene, VignetteBlock } from '../engine/types';
+import { clampMeter, formatDate, rungSpec } from '../engine/ladder';
 import { evalCondition } from '../engine/conditions';
 import { endings } from '../content';
-import { CHARACTERS } from '../content/characters';
+import { CHARACTERS, IS_MOBILE } from '../content/characters';
 import { DebugPanel, Hud, Insert, Sprite, StageBackground } from './components';
 
 // ---------------------------------------------------------------- script steps
@@ -27,6 +27,20 @@ function insertCaption(block: VignetteBlock, flagged: boolean): string {
     default:
       return '…';
   }
+}
+
+// Optimistic meter preview: the moment a choice is picked, reflect its direct
+// (deterministic) meter effects in the scoreboard, before the turn fully
+// resolves. Roll-based / engine-driven changes (progress tick, AI actions)
+// still land when the turn commits — this is immediate feedback for the choice
+// you just made.
+function previewMeters(base: Meters, choice: Choice | null): Meters {
+  if (!choice) return base;
+  const m = { ...base };
+  for (const e of choice.effects) {
+    if ('meter' in e) m[e.meter] = clampMeter(m[e.meter] + e.delta);
+  }
+  return m;
 }
 
 function blocksToSteps(blocks: VignetteBlock[], state: GameState): Step[] {
@@ -122,9 +136,9 @@ export function TitleScreen({ onStart }: { onStart: (seed: number) => void }) {
     [],
   );
   const start = () => {
-    // best-effort fullscreen on the user gesture (Android Chrome honours it;
-    // iOS Safari ignores it — that's fine, the game still fits).
-    document.documentElement.requestFullscreen?.().catch(() => {});
+    // best-effort fullscreen on phones only (Android Chrome honours it; iOS
+    // Safari ignores it). On desktop, leave the browser alone.
+    if (IS_MOBILE) document.documentElement.requestFullscreen?.().catch(() => {});
     onStart((Math.random() * 2 ** 31) | 0);
   };
   return (
@@ -303,7 +317,7 @@ export function TurnScreen({ state, scene, onResolve }: TurnScreenProps) {
         <span className="turn-chip">turn {state.turn}</span>
       </div>
 
-      <Hud state={state} />
+      <Hud state={picked ? { ...state, meters: previewMeters(state.meters, picked) } : state} />
 
       {showingChoices ? (
         <div className="choice-stack" onClick={(e) => e.stopPropagation()}>
